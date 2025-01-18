@@ -25,13 +25,22 @@ def create_project(name):
 
 def start_project(name):
 
-    start_project = f"""UPDATE projects SET current_start_date = %s WHERE name = %s"""
-    
-    cnx = sqlconnect.sqlconnect()   
-    
+    cnx = sqlconnect.sqlconnect() 
+    # GET THE ID of the projectname
+    try:
+        get_project = """SELECT id FROM projects WHERE name=%s"""
+        cursor = cnx.cursor()
+        cursor.execute(get_project, [name])
+
+        project_id = cursor.fetchall()
+
+    except Exception as err:
+        print(err)
+
+    start_project = f"""INSERT INTO projects_time (start_time, project_id) VALUES(%s, %s)"""
     try:
         cursor = cnx.cursor()
-        cursor.execute(start_project, (datetime.now(), name))
+        cursor.execute(start_project, (datetime.now(), project_id[0][0]))
         cnx.commit()
         print('Project Started! Good luck.')
     except Exception as err:

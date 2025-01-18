@@ -39,18 +39,27 @@ def connect():
     cursor = cnx.cursor()
 
     # for creating_table if it doesn't exist yet
-    create_table = """CREATE TABLE projects 
+    create_table_projects = """CREATE TABLE projects 
     (id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     create_date DATETIME DEFAULT NULL,
-    current_start_date DATETIME DEFAULT NULL,
     total_time FLOAT DEFAULT 0,
     end_date DATETIME DEFAULT NULL,
     completed VARCHAR(5) DEFAULT 'NO'
     )"""
 
+    create_table_project_times = """CREATE TABLE projects_time
+    (id INT AUTO_INCREMENT PRIMARY KEY,
+    start_time DATETIME DEFAULT NULL,
+    stop_time DATETIME DEFAULT NULL,
+    project_id INT NOT NULL,
+    FOREIGN KEY (project_id) REFERENCES projects (id))
+"""
+
+
     try:
-        cursor.execute(create_table)
+        cursor.execute(create_table_projects)
+        cursor.execute(create_table_project_times)
         print('Table succesfully created!')
 
     except mysql.connector.Error as e:
@@ -59,7 +68,8 @@ def connect():
     cnx.commit()
 
 def create(db_name):
-
+    if not db_name:
+        print('Please give your DB a name: Command is: create_db <DB name>')
     #sql query for creating a db
     create_db = f'CREATE DATABASE {db_name}'
 

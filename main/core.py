@@ -33,6 +33,8 @@ class MyCLI(cmd.Cmd):
         """Used to stop a project for a certain period of time"""
         stopproject.stop_project(line)
 
+    
+
     def do_exit(self, line):
         """Exits the program"""
         print('Exiting the Time Tracking CLI...')
