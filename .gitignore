@@ -3,3 +3,8 @@
 .env
 
 main/__pycache__
+main/utils/__pycache__
+
+main/untitled.txt
+main/practice.py
+main/utils/__pycache__/startproject.cpython-312.pyc

@@ -9,6 +9,7 @@ def sqlconnect():
         user= config('DB_USER'), password= config('DB_PASSWORD'),
         host = config('DB_HOST'), database= config('DB_NAME')
     )
+        
         return cnx
     except mysql.connector.Error as err:
         if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
@@ -38,10 +39,19 @@ def connect():
     cursor = cnx.cursor()
 
     # for creating_table if it doesn't exist yet
-    create_table = """CREATE TABLE projects (id INT AUTO_INCREMENT PRIMARY KEY,name VARCHAR(255) NOT NULL, start_date DATE DEFAULT NULL, end_date DATE DEFAULT NULL)"""
+    create_table = """CREATE TABLE projects 
+    (id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    create_date DATETIME DEFAULT NULL,
+    current_start_date DATETIME DEFAULT NULL,
+    total_time FLOAT DEFAULT 0,
+    end_date DATETIME DEFAULT NULL,
+    completed VARCHAR(5) DEFAULT 'NO'
+    )"""
 
     try:
         cursor.execute(create_table)
+        print('Table succesfully created!')
 
     except mysql.connector.Error as e:
         print(e.msg)
