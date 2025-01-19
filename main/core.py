@@ -3,6 +3,7 @@ from main.sqlconnect import connect, create
 from main.utils import startproject
 from main.utils import listproject
 from main.utils import stopproject
+from main.utils import projectreport
 
 class MyCLI(cmd.Cmd):
         
@@ -33,7 +34,8 @@ class MyCLI(cmd.Cmd):
         """Used to stop a project for a certain period of time"""
         stopproject.stop_project(line)
 
-    
+    def do_timereport(self, line):
+        projectreport.projectreport(line)
 
     def do_exit(self, line):
         """Exits the program"""
