@@ -28,12 +28,16 @@ def start_project(name):
     cnx = sqlconnect.sqlconnect() 
     # GET THE ID of the projectname
     try:
-        get_project = """SELECT id FROM projects WHERE name=%s"""
+        get_project = """SELECT id FROM projects WHERE name=%s AND completed = 'NO' """
         cursor = cnx.cursor()
         cursor.execute(get_project, [name])
 
         project_id = cursor.fetchall()
 
+        if len(project_id) == 0:
+            print("Project is either marked completed or haven't been made")
+            return 
+        
     except Exception as err:
         print(err)
 

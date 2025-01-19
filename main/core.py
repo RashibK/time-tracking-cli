@@ -4,6 +4,7 @@ from main.utils import startproject
 from main.utils import listproject
 from main.utils import stopproject
 from main.utils import projectreport
+from main.utils import complete
 
 class MyCLI(cmd.Cmd):
         
@@ -34,8 +35,13 @@ class MyCLI(cmd.Cmd):
         """Used to stop a project for a certain period of time"""
         stopproject.stop_project(line)
 
-    def do_timereport(self, line):
+    def do_report(self, line):
+        """Gives you a detailed report on a project.\nCommands include:\n--> report project_name (for all time report)\n--> report project_name month/day/year (for detailed report from day onwards)
+        """
         projectreport.projectreport(line)
+
+    def do_complete(self, line):
+        complete.complete(line)
 
     def do_exit(self, line):
         """Exits the program"""
