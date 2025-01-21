@@ -43,7 +43,7 @@ def connect():
     (id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     create_date DATETIME DEFAULT NULL,
-    total_time FLOAT DEFAULT 0,
+    total_time INT DEFAULT 0,
     end_date DATETIME DEFAULT NULL,
     completed VARCHAR(5) DEFAULT 'NO'
     )"""
