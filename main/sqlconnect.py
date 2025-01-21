@@ -41,7 +41,7 @@ def connect():
     # for creating_table if it doesn't exist yet
     create_table_projects = """CREATE TABLE projects 
     (id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
+    name VARCHAR(255) UNIQUE NOT NULL,
     create_date DATETIME DEFAULT NULL,
     total_time INT DEFAULT 0,
     end_date DATETIME DEFAULT NULL,

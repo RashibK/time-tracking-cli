@@ -28,7 +28,9 @@ def list_all_projects():
         
 
         plt.bar(projects, total_time)
-        plt.title("All Projects")
+        # plt.title("All Projects")
+        plt.xlabel('Projects')
+        plt.ylabel('Total Time Spent (in seconds)')
         plt.show()
     except Exception as err:
         print(err)

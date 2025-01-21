@@ -42,16 +42,25 @@ def projectreport(line):
                 if len(line_list) > 1:
                     if row[0].date() >= date.date():
                         print(f'{row[0]}             {row[1]}')
+                        if  row[1]:
+                            time_difference = row[1] - row[0]
+                            time_difference = time_difference.total_seconds()
+                            total_time += time_difference
+
+                        else:
+                            print('You need to stop the ongoing project before seeing the full report for this project')
+                            return
+                else:
+                    print(f'{row[0]}             {row[1]}')
+                    if  row[1]:
                         time_difference = row[1] - row[0]
                         time_difference = time_difference.total_seconds()
                         total_time += time_difference
 
-                else:
-                    print(f'{row[0]}             {row[1]}')
-                    time_difference = row[1] - row[0]
-                    time_difference = time_difference.total_seconds()
-                    total_time += time_difference
-
+                    else:
+                        print('You need to stop the ongoing project before seeing the full report for this project')
+                        return
+            
             print('-----------------------------------------------')
             print(f'Total time spent on this project is: {int((total_time / 60) // 60)} hrs {int((total_time /60) % 60)} mins')
         except Exception as err:

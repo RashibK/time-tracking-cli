@@ -11,6 +11,9 @@ def stop_project(name):
         cursor.execute(get_project, [name])
         project_id = cursor.fetchall()
 
+        if len(project_id) == 0:
+            print(f"The project with Project Name {name} doesn't exist.")
+            return
     except Exception as err:
         print(err)
 
@@ -19,6 +22,10 @@ def stop_project(name):
         get_start_time = """SELECT start_time FROM projects_time WHERE project_id=%s and stop_time is NULL"""
         cursor.execute(get_start_time, [project_id[0][0]])
         start_time = cursor.fetchall()
+
+        if len(start_time) == 0:
+            print('The project needs to be started before you can stop it.')
+            return
 
         # # put stop_time in the projects_time column where 
         stop_time = datetime.now()

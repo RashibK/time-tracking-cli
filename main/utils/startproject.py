@@ -38,14 +38,26 @@ def start_project(name):
             print("Project is either marked completed or haven't been made")
             return 
         
+        # check if there is already an ongoing project started with the same name
+        project_started = """SELECT start_time FROM projects_time WHERE stop_time is NULL AND project_id = %s"""
+        cursor.execute(project_started, [project_id[0][0]])
+        result = cursor.fetchall()
+
+        if len(result) > 0:
+            print('There is already a project started under same name. Stop that before starting one again.')
+        
+        else:
+            # start a new project_time
+            start_project = f"""INSERT INTO projects_time (start_time, project_id) VALUES(%s, %s)"""
+            try:
+                cursor = cnx.cursor()
+                cursor.execute(start_project, (datetime.now(), project_id[0][0]))
+                cnx.commit()
+                print('Project Started! Good luck.')
+            except Exception as err:
+                print(err)
+
     except Exception as err:
         print(err)
 
-    start_project = f"""INSERT INTO projects_time (start_time, project_id) VALUES(%s, %s)"""
-    try:
-        cursor = cnx.cursor()
-        cursor.execute(start_project, (datetime.now(), project_id[0][0]))
-        cnx.commit()
-        print('Project Started! Good luck.')
-    except Exception as err:
-        print(err)
+        

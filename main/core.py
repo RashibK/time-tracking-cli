@@ -41,6 +41,7 @@ class MyCLI(cmd.Cmd):
         projectreport.projectreport(line)
 
     def do_complete(self, line):
+        """Marks the project complete"""
         complete.complete(line)
 
     def do_exit(self, line):
