@@ -1,4 +1,4 @@
-# Time Tracking CLI
+# Project Tracker | CLI Based
 Welcome to Time Tracking CLI! This command-line interface (CLI) application serves as your personal time tracker, enabling you to manage your projects, track their progress, and generate detailed reports with ease.
 ## Usage
 To get started, use the following command in your root directory.
